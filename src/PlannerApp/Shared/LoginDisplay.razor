@@ -1,0 +1,45 @@
+﻿@inject Blazored.LocalStorage.ILocalStorageService Storage
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+
+<AuthorizeView>
+    <Authorized>
+        <MudMenu FullWidth="true" Style="margin:5px;">
+            <ActivatorContent>
+                <MudChip Icon="@Icons.Material.Filled.Person" Color="Color.Info" Style="margin:5px;">UserGivenNameHere @*@context.User.FindFirst(System.Security.Claims.ClaimTypes.GivenName).Value.ToString()*@</MudChip>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem>Profile</MudMenuItem>
+                <MudMenuItem>Settings</MudMenuItem>
+                <MudMenuItem>Logout</MudMenuItem>
+            </ChildContent>
+        </MudMenu>      
+        <MudChip Icon="@Icons.Material.Filled.Logout" Color="Color.Error" OnClick='LogOutAsync' Style="margin:5px;">Logout</MudChip>
+    </Authorized>
+
+    <NotAuthorized>
+        @*<MudMenu FullWidth="true" Style="margin:5px;">
+            <ActivatorContent>
+                <MudChip Icon="@Icons.Material.Filled.Person" Color="Color.Info" Style="margin:5px;"></MudChip>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem>Login</MudMenuItem>                
+            </ChildContent>
+        </MudMenu>*@
+        <MudChip Icon="@Icons.Material.Filled.Login" Color="Color.Error" OnClick='() => Navigation.NavigateTo("/authentication/login")' Style="margin:5px;">Login</MudChip>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+
+    private async Task LogOutAsync()
+    {
+        await Storage.RemoveItemAsync("access_token");
+        await Storage.RemoveItemAsync("expiry_date");
+
+        await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+        Navigation.NavigateTo("/");
+    }
+}
