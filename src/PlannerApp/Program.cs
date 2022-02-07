@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PlannerApp
@@ -27,32 +26,12 @@ namespace PlannerApp
                 client.BaseAddress = new Uri("https://plannerapp-api.azurewebsites.net");
             }).AddHttpMessageHandler<AuthorizationMessageHandler>();
 
+            builder.Services.AddTransient<AuthorizationMessageHandler>();
+            builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClient("PlannerApp.Api"));
             builder.Services.AddMudServices();
             builder.Services.AddBlazoredLocalStorage();
 
             await builder.Build().RunAsync();
-        }
-    }
-
-    public class AuthorizationMessageHandler : DelegatingHandler
-    {
-
-        private readonly ILocalStorageService _storage;
-
-        public AuthorizationMessageHandler(ILocalStorageService storage)
-        {
-            _storage = storage;
-        }
-
-        protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancelationToken)
-        {
-            if (await _storage.ContainKeyAsync("access_token"))
-            {
-                var token = await _storage.GetItemAsStringAsync("access_token");
-                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-            }
-
-            return await base.SendAsync(request, cancelationToken);
         }
     }
 }
