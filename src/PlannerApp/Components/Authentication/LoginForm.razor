@@ -12,16 +12,24 @@
                     Welcome to PlannerApp v2.0
                 </MudText>
             </CardHeaderContent>            
-        </MudCardHeader>
+        </MudCardHeader>        
 
         <MudCardContent>
-            <MudTextField Label="Email" HelperText="required" @bind-Value="@_model.Email" />
-            <MudTextField InputType="InputType.Password" Label="Password" HelperText="required" @bind-Value="@_model.Password" />
+        <MudTextField Label="Email" HelperText="required" @bind-Value="@_model.Email" />
+        <MudTextField InputType="InputType.Password" Label="Password" HelperText="required" @bind-Value="@_model.Password" />
+
+        @if (!string.IsNullOrWhiteSpace(_errorMessage))
+        {
+            <MudAlert Severity="Severity.Error" Class="my-2" Variant="Variant.Filled">@_errorMessage</MudAlert>
+        }     
+            
+        <ValidationSummary />
+
         </MudCardContent>
 
         <MudCardActions>
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Style="margin:3px;">Login</MudButton>
-            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Style="margin:3px;">Create Account</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Style="margin:3px;" Disabled="_isBusy">Login</MudButton>
+            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Style="margin:3px;" Disabled="_isBusy">Create Account</MudButton>
         </MudCardActions>
 
     </MudCard>

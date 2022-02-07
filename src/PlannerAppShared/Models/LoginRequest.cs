@@ -12,7 +12,7 @@ namespace PlannerAppShared.Models
         [EmailAddress, Required]
         public string Email { get; set; }
 
-        [Required, StringLength(6)]
+        [Required, StringLength(20, MinimumLength = 6)]
         public string Password { get; set; }
     }
 }
