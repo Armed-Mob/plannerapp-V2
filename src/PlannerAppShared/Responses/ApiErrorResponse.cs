@@ -1,4 +1,4 @@
-﻿namespace PlannerAppShared.Responses
+﻿namespace PlannerApp.Shared.Responses
 {
     public class ApiErrorResponse
     {

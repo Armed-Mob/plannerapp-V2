@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
-using PlannerAppShared.Models;
-using PlannerAppShared.Responses;
+using PlannerApp.Shared.Models;
+using PlannerApp.Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;

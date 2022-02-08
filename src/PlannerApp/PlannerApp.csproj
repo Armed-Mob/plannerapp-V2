@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PlannerAppShared\PlannerAppShared.csproj" />
+    <ProjectReference Include="..\PlannerAppShared\PlannerApp.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

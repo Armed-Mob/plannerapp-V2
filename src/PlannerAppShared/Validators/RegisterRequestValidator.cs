@@ -1,12 +1,12 @@
 ﻿using FluentValidation;
-using PlannerAppShared.Models;
+using PlannerApp.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlannerAppShared.Validators
+namespace PlannerApp.Shared.Validators
 {
     public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
     {
