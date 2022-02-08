@@ -1,32 +1,18 @@
-﻿@inject Blazored.LocalStorage.ILocalStorageService Storage
+﻿@using System.Security.Claims
+@inject Blazored.LocalStorage.ILocalStorageService Storage
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager Navigation
 
 <AuthorizeView>
     <Authorized>
-        <MudMenu FullWidth="true" Style="margin:5px;">
-            <ActivatorContent>
-                <MudChip Icon="@Icons.Material.Filled.Person" Color="Color.Info" Style="margin:5px;">UserGivenNameHere @*@context.User.FindFirst(System.Security.Claims.ClaimTypes.GivenName).Value.ToString()*@</MudChip>
-            </ActivatorContent>
-            <ChildContent>
-                <MudMenuItem>Profile</MudMenuItem>
-                <MudMenuItem>Settings</MudMenuItem>
-                <MudMenuItem>Logout</MudMenuItem>
-            </ChildContent>
-        </MudMenu>      
-        <MudChip Icon="@Icons.Material.Filled.Logout" Color="Color.Error" OnClick='LogOutAsync' Style="margin:5px;">Logout</MudChip>
+        <MudMenu Icon="@Icons.Filled.Person" Color="Color.Secondary" Direction="Direction.Right" OffsetY="true">
+            <MudMenuItem>@context.User.FindFirst(ClaimTypes.GivenName).Value</MudMenuItem>
+            <MudMenuItem OnClick="LogOutAsync">Logout</MudMenuItem>
+        </MudMenu>        
     </Authorized>
 
     <NotAuthorized>
-        @*<MudMenu FullWidth="true" Style="margin:5px;">
-            <ActivatorContent>
-                <MudChip Icon="@Icons.Material.Filled.Person" Color="Color.Info" Style="margin:5px;"></MudChip>
-            </ActivatorContent>
-            <ChildContent>
-                <MudMenuItem>Login</MudMenuItem>                
-            </ChildContent>
-        </MudMenu>*@
-        <MudChip Icon="@Icons.Material.Filled.Login" Color="Color.Error" OnClick='() => Navigation.NavigateTo("/authentication/login")' Style="margin:5px;">Login</MudChip>
+        <MudIconButton Icon="@Icons.Filled.Login" Color="Color.Secondary" OnClick='() => Navigation.NavigateTo("/authentication/login")' />
     </NotAuthorized>
 </AuthorizeView>
 
