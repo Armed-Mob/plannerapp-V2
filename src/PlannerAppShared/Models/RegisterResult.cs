@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace PlannerApp.Shared.Models
 {
-    public class RegisterRequest
+    public class RegisterResult
     {
-
         public string UserName { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
         public string ConfirmPassword { get; set; }
-        public string PasswordHash { get; set; }
-
+        public string Password { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

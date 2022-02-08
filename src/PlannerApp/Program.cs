@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MudBlazor.Services;
+using PlannerApp.Client.Services;
+using PlannerApp.Client.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -35,6 +37,8 @@ namespace PlannerApp
 
             builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClient("PlannerApp.Api"));
             builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthenticationStateProvider>();
+            builder.Services.AddScoped<IAuthenticationService, HttpAuthenticationService>();
+            builder.Services.AddHttpClientServices();
 
             await builder.Build().RunAsync();
         }

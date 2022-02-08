@@ -1,0 +1,41 @@
+﻿@namespace PlannerApp.Components
+
+
+
+<EditForm Model="_model" OnValidSubmit="RegisterUserAsync">
+    <DataAnnotationsValidator />
+
+    <MudCard Class="mt-3 py-8 px-10" Elevation="20">
+
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h6">
+                    PlannerApp V2.0 Registration
+                </MudText>
+            </CardHeaderContent>            
+        </MudCardHeader>        
+
+        <MudCardContent>
+            <MudTextField Label="User Name" HelperText="required" @bind-Value="@_model.UserName" />
+            <MudTextField Label="First Name" HelperText="required" @bind-Value="@_model.FirstName" />
+            <MudTextField Label="Last Name" HelperText="required" @bind-Value="@_model.LastName" />
+            <MudTextField Label="Email" HelperText="required" @bind-Value="@_model.Email" />
+            <MudTextField InputType="InputType.Password" Label="Password" HelperText="required" @bind-Value="@_model.Password" />
+            <MudTextField InputType="InputType.Password" Label="Confirm Password" HelperText="required" @bind-Value="@_model.ConfirmPassword" />
+
+            @if (!string.IsNullOrWhiteSpace(_errorMessage))
+            {
+                <MudAlert Severity="Severity.Error" Class="my-2" Variant="Variant.Filled">@_errorMessage</MudAlert>
+            }     
+            
+            <ValidationSummary />
+
+        </MudCardContent>
+
+        <MudCardActions>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Style="margin:3px;" Disabled="_isBusy" OnClick="RegisterUserAsync">Register</MudButton>
+            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Style="margin:3px;" Disabled="_isBusy" OnClick='() => Navigation.NavigateTo("/authentication/login")'>Login</MudButton>
+        </MudCardActions>
+
+    </MudCard>
+</EditForm>

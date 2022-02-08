@@ -1,6 +1,7 @@
 ﻿@namespace PlannerApp.Components
 
 
+
 <EditForm Model="_model" OnValidSubmit="LoginUserAsync">
     <DataAnnotationsValidator />
 
@@ -28,8 +29,8 @@
         </MudCardContent>
 
         <MudCardActions>
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Style="margin:3px;" Disabled="_isBusy">Login</MudButton>
-            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Style="margin:3px;" Disabled="_isBusy">Create Account</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Style="margin:3px;" Disabled="_isBusy" OnClick="LoginUserAsync">Login</MudButton>
+            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Style="margin:3px;" Disabled="_isBusy" OnClick='() => Navigation.NavigateTo("/authentication/register")'>Create Account</MudButton>
         </MudCardActions>
 
     </MudCard>
